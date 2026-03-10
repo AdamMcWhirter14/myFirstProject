@@ -1,9 +1,20 @@
-<x-layout>
-    <x-slot:heading>
-        Job
-    </x-slot:heading>
+<?php
 
-    <h2 class="font-bold text-lg">{{ $job->title }}</h2>
-    <p>This job pays {{ $job->salary }} per year</p>
+namespace App\Models;
 
-</x-layout>
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+
+class Job extends Model
+{
+    use HasFactory;
+
+    protected $table = 'job_listings';
+
+    protected $fillable = ['title', 'salary', 'employer_id'];
+
+    public function employer()
+    {
+        return $this->belongsTo(Employer::class);
+    }
+}
