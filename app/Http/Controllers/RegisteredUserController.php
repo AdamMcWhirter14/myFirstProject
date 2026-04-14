@@ -1,0 +1,33 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Models\User;
+use Illuminate\Http\Request;
+
+class RegisteredUserController extends Controller
+{
+    public function create()
+    {
+        return view('auth.register');
+    }
+
+    public function store()
+    {
+        request()->validate([
+            'first_name' => ['required'],
+            'last_name' => ['required'],
+            'email' => ['required', 'email'],
+            'password' => ['required', 'confirmed', 'min:6'],
+        ]);
+
+        User::create([
+            'first_name' => request('first_name'),
+            'last_name' => request('last_name'),
+            'email' => request('email'),
+            'password' => bcrypt(request('password')),
+        ]);
+
+        return redirect('/jobs');
+    }
+}
