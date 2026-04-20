@@ -1,4 +1,14 @@
-<nav class="bg-gray-800">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My First Project</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-900">
+
+    <<nav class="bg-gray-800">
     <div class="mx-auto max-w-7xl px-4">
         <div class="flex h-16 items-center justify-between">
             <div class="flex items-center space-x-4">
@@ -12,7 +22,30 @@
                     <x-nav-link href="/login" :active="request()->is('login')">Log In</x-nav-link>
                     <x-nav-link href="/register" :active="request()->is('register')">Register</x-nav-link>
                 @endguest
+                @auth
+                    <form method="POST" action="/logout">
+                        @csrf
+                        <x-form-button>Log Out</x-form-button>
+                    </form>
+                @endauth
             </div>
         </div>
     </div>
 </nav>
+
+    <header class="bg-white shadow">
+        <div class="mx-auto max-w-7xl px-4 py-6">
+            <h1 class="text-3xl font-bold tracking-tight text-gray-900">
+                {{ $heading }}
+            </h1>
+        </div>
+    </header>
+
+    <main>
+        <div class="mx-auto max-w-7xl px-4 py-6">
+            {{ $slot }}
+        </div>
+    </main>
+
+</body>
+</html>

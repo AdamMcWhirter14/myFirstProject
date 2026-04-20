@@ -3,6 +3,6 @@
         Home
     </x-slot:heading>
 
-    <p class="text-white">{{ $greeting }}</p>
+    <p class="text-white">Welcome to the site!</p>
 
 </x-layout>
